@@ -1,0 +1,29 @@
+<p>assurance works!</p>
+
+
+<h1> {{nom()}} </h1>
+<p>{{prenom()}}</p>
+<p>{{age()}}</p>
+
+
+<button (click)="print()"  >Salut</button>
+
+<input type="text" [(ngModel)]="nom" >
+
+
+<table>
+
+  @if (verif()){
+    <p>True</p>
+  } @else {
+    <p>False</p>
+  }
+
+  @for ( a of tabPerso(); track  a.id) {
+      <tr>
+        <td>{{a.id}}</td>
+        <td>{{a.titre}}</td>
+      </tr>
+  }
+
+</table>
