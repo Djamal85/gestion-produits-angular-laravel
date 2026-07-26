@@ -1,0 +1,47 @@
+<div class="container mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h2 mb-0">Produits</h1>
+    <a class="btn btn-success" routerLink="/addProduct">Ajouter</a>
+  </div>
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  }
+  @if (loading()) {
+    <p>Chargement...</p>
+  } @else {
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Catégorie</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of tabProduct(); track product.id) {
+            <tr>
+              <td>{{ product.id }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }} F CFA</td>
+              <td>{{ product.category?.name || 'Sans catégorie' }}</td>
+              <td>{{ product.description || '—' }}</td>
+              <td class="d-flex gap-2">
+                <a class="btn btn-sm btn-primary" [routerLink]="['/editProduct', product.id]">Modifier</a>
+                <button (click)="delete(product.id)" class="btn btn-sm btn-danger">Supprimer</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="text-center py-4">Aucun produit enregistré.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

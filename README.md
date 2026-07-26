@@ -1,59 +1,28 @@
-# GestionFrontIage
+# Gestion Produits
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.4.
+Application complète composée de deux projets :
 
-## Development server
+- `FRONT` : interface Angular ;
+- `BACK` : API Laravel, Sanctum, Swagger et PostgreSQL.
 
-To start a local development server, run:
+## Démarrage du backend
 
-```bash
-ng serve
+```powershell
+cd BACK
+php artisan serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+API : `http://localhost:8000`
 
-## Code scaffolding
+Swagger : `http://localhost:8000/api/documentation`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Démarrage du frontend
 
-```bash
-ng generate component component-name
+Dans un second terminal :
+
+```powershell
+cd FRONT
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Application : `http://localhost:4200`
