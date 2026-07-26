@@ -2,15 +2,15 @@ import { Component, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductModel } from '../models/product-model';
 import { ProductService } from '../services/product-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './product.html',
   styleUrl: './product.css',
 })
 export class Product {
-
   tabProduct = signal<ProductModel[]>([]);
   //Injection
   /*public constructor(public http: HttpClient ) {
@@ -24,23 +24,16 @@ export class Product {
     this.getAll();
   }
 
-  getAll(){
-  this.productService.getAll().subscribe(
-      res => {
-        this.tabProduct.set(res);
-        console.log(res);
-      }
-    )
+  getAll() {
+    this.productService.getAll().subscribe((res) => {
+      this.tabProduct.set(res);
+      console.log(res);
+    });
   }
 
-  delete(id : number) : void {
-    this.productService.delete(id).subscribe(
-       res => {
-          this.getAll();
-       }
-     )
+  delete(id: number): void {
+    this.productService.delete(id).subscribe((res) => {
+      this.getAll();
+    });
   }
-
-
-
 }
