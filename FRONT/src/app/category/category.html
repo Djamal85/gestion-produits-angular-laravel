@@ -4,18 +4,21 @@
   @if (error()) {
     <div class="alert alert-danger">{{ error() }}</div>
   }
-
+  // Tableau des catégories
   <div class="row g-4">
     <div class="col-lg-4">
       <div class="card shadow-sm">
         <div class="card-body">
+          // Formulaire d'ajout / modification de catégorie
           <h2 class="h5 mb-3">{{ editingId() ? 'Modifier' : 'Ajouter' }} une catégorie</h2>
           <form [formGroup]="form" (ngSubmit)="submit()">
             <div class="mb-3">
+              // Nom de la catégorie
               <label for="category-name" class="form-label">Nom</label>
               <input id="category-name" class="form-control" formControlName="name">
             </div>
             <div class="mb-3">
+              // Description de la catégorie
               <label for="category-description" class="form-label">Description</label>
               <textarea id="category-description" rows="3" class="form-control" formControlName="description"></textarea>
             </div>

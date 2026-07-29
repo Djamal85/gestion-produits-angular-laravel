@@ -31,6 +31,7 @@ class Product extends Model
 {
     use HasFactory;
 
+    // Champs autorisés pour Product::create() et update().
     protected $fillable = [
         'name',
         'price',
@@ -47,6 +48,7 @@ class Product extends Model
 
     public function category(): BelongsTo
     {
+        // products.category_id référence categories.id.
         return $this->belongsTo(Category::class);
     }
 }

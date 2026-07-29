@@ -9,6 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table): void {
+            // nullable conserve les anciens produits ; nullOnDelete évite de les supprimer
+            // automatiquement lorsque leur catégorie disparaît.
             $table->foreignId('category_id')
                 ->nullable()
                 ->constrained()

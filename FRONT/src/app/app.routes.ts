@@ -7,6 +7,7 @@ import { Category } from './category/category';
 // import { authGuard } from './services/auth-guard';
 
 export const routes: Routes = [
+  // La racine de l'application redirige vers la liste des produits.
   { path: '', redirectTo: 'product', pathMatch: 'full' },
   // Authentification temporairement désactivée :
   // { path: 'login', component: Login },
@@ -15,9 +16,17 @@ export const routes: Routes = [
   // { path: 'addProduct', component: AddProduct, canActivate: [authGuard] },
   // { path: 'editProduct/:id', component: AddProduct, canActivate: [authGuard] },
 
+  // Routes publiques actuellement utilisées.
   { path: 'product', component: Product },
+
+  // Le même composant sert à créer et modifier un produit.
+  // La présence du paramètre :id active le mode modification.
   { path: 'addProduct', component: AddProduct },
   { path: 'editProduct/:id', component: AddProduct },
+
+  // La gestion des catégories regroupe liste, ajout et modification.
   { path: 'categories', component: Category },
+
+  // Toute URL inconnue ramène vers la page principale.
   { path: '**', redirectTo: 'product' },
 ];

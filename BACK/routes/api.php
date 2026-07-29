@@ -34,5 +34,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Mode public temporaire : aucun token n'est nécessaire.
+/*
+|--------------------------------------------------------------------------
+| API actuellement utilisée par Angular
+|--------------------------------------------------------------------------
+|
+| apiResource génère automatiquement cinq opérations CRUD :
+| GET index, POST store, GET show, PUT/PATCH update et DELETE destroy.
+| Le mode est public pour le moment : aucun token n'est nécessaire.
+|
+*/
 Route::apiResource('products', ProductController::class);
 Route::apiResource('categories', CategoryController::class);

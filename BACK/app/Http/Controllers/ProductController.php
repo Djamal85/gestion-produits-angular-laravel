@@ -34,6 +34,7 @@ class ProductController extends Controller
     )]
     public function index(): AnonymousResourceCollection
     {
+        // with('category') évite une requête SQL supplémentaire pour chaque produit.
         return ProductResource::collection(
             Product::query()->with('category')->latest()->get()
         );
@@ -81,8 +82,10 @@ class ProductController extends Controller
     )]
     public function store(Request $request): JsonResponse
     {
+        // La validation est centralisée pour être réutilisée lors d'une modification.
         $product = Product::create($this->validateProduct($request));
 
+        // Une création REST réussie retourne le statut HTTP 201.
         return (new ProductResource($product->load('category')))
             ->response()
             ->setStatusCode(201);
@@ -112,6 +115,7 @@ class ProductController extends Controller
     )]
     public function show(Product $product): ProductResource
     {
+        // Laravel trouve le produit grâce au paramètre {product} de la route.
         return new ProductResource($product->load('category'));
     }
 
@@ -139,6 +143,7 @@ class ProductController extends Controller
     {
         $product->update($this->validateProduct($request));
 
+        // refresh() relit les valeurs enregistrées avant de construire la réponse JSON.
         return new ProductResource($product->refresh()->load('category'));
     }
 
@@ -164,11 +169,13 @@ class ProductController extends Controller
     {
         $product->delete();
 
+        // Une suppression réussie retourne un statut HTTP 204 sans contenu.
         return response()->noContent();
     }
 
     private function validateProduct(Request $request): array
     {
+        // exists garantit que la catégorie choisie existe réellement en base.
         return $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'price' => ['required', 'integer', 'min:0'],

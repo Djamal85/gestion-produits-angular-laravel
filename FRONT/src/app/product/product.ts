@@ -10,16 +10,19 @@ import { RouterLink } from '@angular/router';
   styleUrl: './product.css',
 })
 export class Product {
+  // Les signals mettent automatiquement le template à jour quand leur valeur change.
   readonly tabProduct = signal<ProductModel[]>([]);
   readonly loading = signal(true);
   readonly error = signal('');
   private readonly productService = inject(ProductService);
 
   ngOnInit() {
+    // Le chargement démarre dès l'affichage du composant.
     this.getAll();
   }
 
   getAll() {
+    // Réinitialise l'état visuel avant chaque appel à l'API.
     this.loading.set(true);
     this.error.set('');
     this.productService.getAll().subscribe({
@@ -35,6 +38,7 @@ export class Product {
   }
 
   delete(id: number): void {
+    // La confirmation évite une suppression accidentelle.
     if (!confirm('Voulez-vous vraiment supprimer ce produit ?')) {
       return;
     }

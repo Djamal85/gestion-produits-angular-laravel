@@ -20,6 +20,8 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="updated_at", type="string", format="date-time")
  * )
  */
+
+
 class Assurance extends Model
 {
     use HasFactory;

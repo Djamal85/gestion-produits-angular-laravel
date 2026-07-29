@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryModel } from '../models/category-model';
 import { CategoryService } from '../services/category-service';
 
+//
 @Component({
   selector: 'app-category',
   imports: [ReactiveFormsModule],
@@ -14,6 +15,7 @@ export class Category {
   private readonly categoryService = inject(CategoryService);
 
   readonly categories = signal<CategoryModel[]>([]);
+  // null = ajout ; un identifiant = modification.
   readonly editingId = signal<number | null>(null);
   readonly loading = signal(false);
   readonly error = signal('');
@@ -27,6 +29,7 @@ export class Category {
   }
 
   loadCategories(): void {
+    // Recharge la liste après chaque ajout, modification ou suppression.
     this.loading.set(true);
     this.categoryService.getAll().subscribe({
       next: (categories) => {
@@ -41,6 +44,7 @@ export class Category {
   }
 
   edit(category: CategoryModel): void {
+    // Passe en mode modification et recopie les valeurs dans le formulaire.
     this.editingId.set(category.id);
     this.form.setValue({
       name: category.name,
@@ -49,6 +53,7 @@ export class Category {
   }
 
   cancelEdit(): void {
+    // Revient au mode ajout avec un formulaire vide.
     this.editingId.set(null);
     this.form.reset();
   }
@@ -62,6 +67,7 @@ export class Category {
     this.loading.set(true);
     this.error.set('');
     const id = this.editingId();
+    // Le mode courant détermine si le service effectue un POST ou un PUT.
     const request = id
       ? this.categoryService.update(id, this.form.getRawValue())
       : this.categoryService.create(this.form.getRawValue());
@@ -79,6 +85,7 @@ export class Category {
   }
 
   delete(category: CategoryModel): void {
+    // Demande une confirmation avant l'appel DELETE.
     if (!confirm(`Supprimer la catégorie « ${category.name} » ?`)) {
       return;
     }
